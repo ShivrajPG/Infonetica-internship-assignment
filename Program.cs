@@ -17,7 +17,7 @@ app.MapPost("/workflows", (WorkflowDefinition workflow) =>
 
     workflowsDb[workflow.Id] = workflow;
 
-    Console.WriteLine($"✅ New workflow created: {workflow.Id} at {DateTime.UtcNow}");
+    Console.WriteLine($"New workflow created: {workflow.Id} at {DateTime.UtcNow}");
     return Results.Created($"/workflows/{workflow.Id}", workflow);
 });
 
@@ -50,7 +50,7 @@ app.MapPost("/workflows/{workflowId}/instances", (string workflowId) =>
 
     instancesDb[wfInstance.Id] = wfInstance;
 
-    Console.WriteLine($"📦 Instance started: {wfInstance.Id} at state '{initialState.Id}'");
+    Console.WriteLine($"Instance started: {wfInstance.Id} at state '{initialState.Id}'");
     return Results.Created($"/instances/{wfInstance.Id}", wfInstance);
 });
 
@@ -85,7 +85,7 @@ app.MapPost("/instances/{id}/actions/{actionId}", (string id, string actionId) =
     wfInstance.CurrentStateId = transition.ToState;
     wfInstance.History.Add(new InstanceHistoryEntry(actionId, DateTime.UtcNow));
 
-    Console.WriteLine($"🔁 Action '{actionId}' executed on instance {id}");
+    Console.WriteLine($"Action '{actionId}' executed on instance {id}");
     return Results.Ok(wfInstance);
 });
 
